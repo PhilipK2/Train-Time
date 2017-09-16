@@ -66,6 +66,7 @@
                             </div>
 
                             <button type="button" class="btn btn-info" id="submitBtn">Submit</button>
+                            <button type="button" class="btn btn-info" id="deleteBtn">Remove Train</button>
 
                         </form>
                     </div>
@@ -91,7 +92,7 @@
                 event.preventDefault();
                 var name = $("#name").val().trim();
                 var dest = $("#dest").val().trim();
-                var time = $("#time").val().trim(); // "DD/MM/YY").format("X");
+                var time = $("#time").val().trim();
                 var freq = $("#freq").val().trim();
 
                 //creating object from user input
@@ -118,33 +119,23 @@
                 var newTime = snap.val().time;
                 var newFreq = snap.val().frequency;
 
-                //current moment test
-                var now = moment();
-                console.log(now);
-
+                //input for frequency of train
                 var tFrequency = newFreq;
-
                 //input of first train time
                 var firstTime = newTime;
-                // console.log(firstTime);
+                // converting userinput to time
                 var firstTimeConvert = moment(firstTime, "hh:mm");
-                console.log(firstTimeConvert);
                 //current time
                 var currentTime = moment();
-                console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
                 //diff between times
                 var diffTime = moment().diff(moment(firstTimeConvert), "minutes");
-                console.log("DIFFERENCE IN TIME: " + diffTime);
                 //time until next train
                 var tRemainder = diffTime % tFrequency;
-                console.log(tRemainder);
                 //Minute Until Train
                 var tMinutesUntill = tFrequency - tRemainder;
-                console.log("MINUTES TILL TRAIN: " + tMinutesUntill);
                 //next train
                 var nextTrain = moment().add(tMinutesUntill, "minutes");
-                console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
-                //formatting next train
+                //formatting next train user input
                 nextTrainConvert = moment(nextTrain).format("hh:mm");
 
                 //pushes to the table
